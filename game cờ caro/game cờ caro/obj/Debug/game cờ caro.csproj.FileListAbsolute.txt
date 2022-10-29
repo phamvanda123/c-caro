@@ -1,0 +1,17 @@
+E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\bin\Debug\game cờ caro.exe.config
+E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\bin\Debug\game cờ caro.exe
+E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\bin\Debug\game cờ caro.pdb
+E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\obj\Debug\game cờ caro.csproj.AssemblyReference.cache
+E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\obj\Debug\game cờ caro.csproj.SuggestedBindingRedirects.cache
+E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\obj\Debug\MainWindow.g.cs
+E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\obj\Debug\App.g.cs
+E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\obj\Debug\game cờ caro_MarkupCompile.cache
+E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\obj\Debug\game cờ caro_MarkupCompile.lref
+E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\obj\Debug\MainWindow.baml
+E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\obj\Debug\game cờ caro.g.resources
+E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\obj\Debug\game_cờ_caro.Properties.Resources.resources
+E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\obj\Debug\game cờ caro.csproj.GenerateResource.cache
+E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\obj\Debug\game cờ caro.csproj.CoreCompileInputs.cache
+E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\obj\Debug\game cờ caro.exe
+E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\obj\Debug\game cờ caro.pdb
+E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\obj\Debug\myStyle.baml
