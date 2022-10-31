@@ -95,6 +95,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="font\Munstar-Regular.ttf" />
+    <Resource Include="font\Danger Night - Personal Use.ttf" />
+    <Resource Include="font\VehicleBreaksDown-Regular.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -113,9 +116,6 @@
     <Resource Include="images\3.JPG" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\reset.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\character1.png" />
     <Resource Include="images\character2.png" />
   </ItemGroup>
@@ -129,9 +129,6 @@
     <Resource Include="images\skin\xStyle2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\undo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\backgroundRed.png" />
   </ItemGroup>
   <ItemGroup>
@@ -139,10 +136,31 @@
     <Resource Include="images\minimize.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\xaml\button.png" />
+    <Resource Include="images\xaml\buttonClick.png" />
+    <Resource Include="images\xaml\buttonHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\xaml\backGroundDaoDien.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\xaml\backGroundTextBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\home.png" />
+    <Resource Include="images\reset.png" />
+    <Resource Include="images\setting.png" />
+    <Resource Include="images\undo.png" />
     <Resource Include="images\help.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\setting.png" />
+    <Resource Include="images\border.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\backgroundLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\backgroundLeft1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -36,29 +36,39 @@
             <Canvas x:Name="myCanvas" Grid.Column="1" Width="500"  Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center">
 
             </Canvas>
+            <Grid Grid.Row="2" Grid.RowSpan="2" Panel.ZIndex="3" Opacity="0.7" VerticalAlignment="Center" Height="250">
+                <Grid.Background>
+                    <ImageBrush ImageSource="images/border.png"/>
+                </Grid.Background>
+            </Grid>
+            <Grid Grid.Row="2" Grid.RowSpan="2" Margin="0 30" Opacity="0.8">
+                <Grid.Background>
+                    <ImageBrush ImageSource="images/backgroundLeft1.png"/>
+                </Grid.Background>
+            </Grid>
             <!--nơi hiển thị tên và lượt của người chơi-->
-            <StackPanel Grid.Row="0" Grid.Column="0">
-                <TextBlock Text="lượt của người chơi" TextAlignment="Center" FontSize="20"/>
-                <TextBox x:Name="txtHienThiTenNguoiChoi" Width="200" IsEnabled="True"/>
-                <Rectangle x:Name="ImageTenNguoiChoi" Height="90px" Width="90px" Fill="Orange"/>
+            <StackPanel Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Center">
+                <TextBlock Text="Player's Turn" FontFamily="{StaticResource myFont2}" Foreground="PowderBlue" TextAlignment="Center" FontSize="20"/>
+                <TextBox x:Name="txtHienThiTenNguoiChoi" Width="200" Style="{StaticResource textBoxTuyChon}" IsEnabled="True"/>
+                <Rectangle x:Name="ImageTenNguoiChoi" Margin="0 10 0 0" Height="90px" Width="90px"/>
             </StackPanel>
             <!--2 nhân vật ở bên trái và phải-->
             <Rectangle Style="{StaticResource RectangleStyle2}" Grid.Column="0" Grid.Row="1"/>
             <Rectangle Grid.Column="0" Grid.Row="1" Fill="Orange" Panel.ZIndex="-999"/>
             <Rectangle Grid.Column="2" Grid.Row="1" Fill="Honeydew" Panel.ZIndex="-999"/>
-            <Label Content="người chơi 1" Grid.Column="0" Grid.Row="1" Style="{StaticResource LabelStyle}" VerticalAlignment="Bottom"/>
+            <Label Content="PLAYER 1" Grid.Column="0" Grid.Row="1" Style="{StaticResource LabelStyle}" VerticalAlignment="Bottom"/>
             <Rectangle Style="{StaticResource RectangleStyle3}" Grid.Column="2" Grid.Row="1"/>
-            <Label Content="người chơi 2" Grid.Column="2" Grid.Row="1" Style="{StaticResource LabelStyle}" VerticalAlignment="Bottom"/>
+            <Label Content="PLAYER 2" Grid.Column="2" Grid.Row="1" Style="{StaticResource LabelStyle}" VerticalAlignment="Bottom"/>
             <!--các thanh tùy chọn-->
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
                 <!--thanh cài đặt-->
-                <StackPanel Margin="0 15 0 0">
+                <StackPanel>
                     <Rectangle Style="{StaticResource RectangleStyle}" Name="Setting">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="images/setting.png"/>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <Label Content="Tùy chỉnh" Style="{StaticResource LabelStyle}"/>
+                    <Label Content="Setting" Style="{StaticResource LabelStyle}"/>
                 </StackPanel>
                 <!--thanh Reset-->
                 <StackPanel Margin="30 0 0 0">
@@ -67,60 +77,109 @@
                             <ImageBrush ImageSource="images/reset.png"/>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <Label Content="Tải lại" Style="{StaticResource LabelStyle}"/>
+                    <Label Content="Reset" Style="{StaticResource LabelStyle}"/>
                 </StackPanel>
-                <!--thanh trở lại-->
+                <!--thanh cách chơi-->
                 <StackPanel Margin="30 0 0 0">
                     <Rectangle Style="{StaticResource RectangleStyle}" Name="Help">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="images/help.png"/>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <Label Content="Cách chơi" Style="{StaticResource LabelStyle}"/>
+                    <Label Content="Help" Style="{StaticResource LabelStyle}"/>
                 </StackPanel>
-                <!--thanh hướng dẫn chơi-->
+                <!--thanh trở lại-->
                 <StackPanel Margin="30 0 0 0">
                     <Rectangle Style="{StaticResource RectangleStyle}" Name="Undo">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="images/undo.png"/>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <Label Content="Trở lại" Style="{StaticResource LabelStyle}"/>
+                    <Label Content="Undo" Style="{StaticResource LabelStyle}"/>
+                </StackPanel>
+                <!--thanh về menu-->
+                <StackPanel Margin="30 0 0 0">
+                    <Rectangle Style="{StaticResource RectangleStyle}" Name="backMenu">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="images/home.png"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Content="Menu" Style="{StaticResource LabelStyle}"/>
                 </StackPanel>
             </StackPanel>
             <!--thanh thời gian kết thúc-->
-            <ProgressBar x:Name="Time" Grid.Row="2" Grid.Column="2" Maximum="100" Value="100" Minimum="0" Height="50" VerticalAlignment="Bottom"/>
+            <ProgressBar Foreground="Aqua" Background="AntiqueWhite" x:Name="Time" Grid.Row="2" Grid.Column="2" Maximum="100" Value="100" Minimum="0" Height="50" VerticalAlignment="Bottom">
+            </ProgressBar>
         </Grid>
-        <Grid Background="Blue" Opacity="0.4" Name="myGrid"></Grid>
-        <Grid Name="myGrid1" Opacity="0.9" Background="HotPink" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid Background="Blue" Opacity="0.4" Name="myGrid" Visibility="Hidden"></Grid>
+        <Grid Name="myGrid1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1300" Height="800" Visibility="Hidden">
+            <Grid.Background>
+                <ImageBrush ImageSource="images/xaml/backGroundDaoDien.png"/>
+            </Grid.Background>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="Game cờ caro hai người chơi" Foreground="Green" FontSize="30" HorizontalAlignment="Center" FontWeight="Bold"/>
-                <TextBlock Text="Thông tin người chơi 1" FontSize="30"/>
-                <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                    <TextBlock Text="Tên người chơi:" FontSize="30"/>
-                    <TextBox Name="txtPlayer1" Width="300" Margin="10 0 0 0 "/>
+                <TextBlock Text="GAME CARO CHESS" FontFamily="{StaticResource myFont}" Foreground="Green" FontSize="30" HorizontalAlignment="Center" FontWeight="Bold"/>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="PLAYER 1" Style="{StaticResource textBlockTuyChon}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="NAME PLAYER 1:"  Style="{StaticResource textBlockTuyChon}"/>
+                            <TextBox Name="txtPlayer1" Text="PLAYER 1" Style="{StaticResource textBoxTuyChon}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50" >
+                            <TextBlock Text="SKIN CHESS PLAYER 1" Style="{StaticResource textBlockTuyChon}"/>
+                            <ComboBox Name="MyComboBox" Style="{StaticResource comboBoxTuyChon}">
+                            </ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="PLAYER 2" Style="{StaticResource textBlockTuyChon}"/>
+                        <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                            <TextBlock Text="NAME PLAYER 2:" Style="{StaticResource textBlockTuyChon}"/>
+                            <TextBox Name="txtPlayer2" Text="PLAYER 2" Style="{StaticResource textBoxTuyChon}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50" >
+                            <TextBlock Text="SKIN CHESS PLAYER 2" Style="{StaticResource textBlockTuyChon}"/>
+                            <ComboBox Name="MyComboBox1" Style="{StaticResource comboBoxTuyChon}">
+                            </ComboBox>
+                        </StackPanel>
+                    </StackPanel>
                 </StackPanel>
-                <ComboBox Name="MyComboBox" SelectedIndex="0">
-                </ComboBox>
-                <TextBlock Text="Thông tin người chơi 2" FontSize="30"/>
-                <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                    <TextBlock Text="Tên người chơi:" FontSize="30"/>
-                    <TextBox Name="txtPlayer2" Width="300" Margin="10 0 0 0 "/>
+                <TextBlock Text="CHESS BOARD" Style="{StaticResource textBlockTuyChon}"/>
+                <StackPanel Orientation="Horizontal" Margin="200 10 0 0">
+                    <TextBlock Text="TIME" Style="{StaticResource textBlockTuyChon}"/>
+                    <TextBox Name="txtPlayerTime" Text="10" Margin="40 0 0 0" Style="{StaticResource textBoxTuyChon}"/>
                 </StackPanel>
-                <ComboBox Name="MyComboBox1" SelectedIndex="0">
-                </ComboBox>
-                <TextBlock Text="Thông số bàn cờ" FontSize="30"/>
-                <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                    <TextBlock Text="thời gian 1 đánh 1 lượt" FontSize="30"/>
-                    <TextBox Name="txtPlayerTime" Text="10" Width="50" Margin="10 0 0 0"/>
+                <StackPanel Orientation="Horizontal" Margin="200 0 0 0">
+                    <TextBlock Text="SKIN CHESS PLAYER 2" Style="{StaticResource textBlockTuyChon}"/>
+                    <ComboBox Name="MyComboBox3" Style="{StaticResource comboBoxTuyChon}">
+                    </ComboBox>
                 </StackPanel>
-                <TextBlock Text="Màu nền bàn cờ" FontSize="30"/>
-                <ComboBox Name="MyComboBox3" SelectedIndex="0">
-                </ComboBox>
-                <Button Content="choi 2 nguoi" Margin="20" Width="200" Height="40" Click="Button_Click"/>
-                <Button Content="test kết nối" Margin="20" Width="200" Height="40" Click="Button_Click_1"/>
-                <Button Content="choi voi may" Margin="20" Width="200" Height="40" Click="Button_Click_2"/>
+                <Grid>
+                    <Rectangle Cursor="Hand" Style="{StaticResource btnGiaoDien}" PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown_2"/>
+                    <TextBlock Text="OK" FontFamily="{StaticResource myFont}" Style="{StaticResource textBlockGiaoDien}"/>
+                </Grid>
             </StackPanel>
+        </Grid>
+        <Grid Background="Yellow" Opacity="0" Name="myGridBackground"></Grid>
+        <Grid x:Name="myGridButton" Height="600" Width="500">
+            <Grid.Background>
+                <ImageBrush ImageSource="images/xaml/backGroundDaoDien.png"/>
+            </Grid.Background>
+            <StackPanel VerticalAlignment="Center">
+                <Grid>
+                    <Rectangle Cursor="Hand" Style="{StaticResource btnGiaoDien}" PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"/>
+                    <TextBlock x:Name="textBlockBtn1" Text="START" FontFamily="{StaticResource myFont}" Style="{StaticResource textBlockGiaoDien}"/>
+                </Grid>
+                <Grid>
+                    <Rectangle Cursor="Hand" Style="{StaticResource btnGiaoDien}" PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown_1"/>
+                    <TextBlock x:Name="textBlockBtn2" Text="SETTING" FontFamily="{StaticResource myFont}" Style="{StaticResource textBlockGiaoDien}"/>
+                </Grid>
+                <Grid>
+                    <Rectangle Cursor="Hand" Style="{StaticResource btnGiaoDien}" PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown_3"/>
+                    <TextBlock x:Name="textBlockBtn3" Text="QUIT" FontFamily="{StaticResource myFont}" Style="{StaticResource textBlockGiaoDien}"/>
+                </Grid>
+            </StackPanel>
+            <TextBlock FontSize="40" VerticalAlignment="Top" Text="CHESS CARO" Style="{StaticResource textBlockTuyChon}"/>
         </Grid>
     </Grid>
 </Window>

@@ -8,7 +8,6 @@
                 <ControlTemplate TargetType="Button">
                     <Border Name="border" 
                         BorderThickness="1"
-                        Padding="4,2" 
                         BorderBrush="DarkGray" 
                         CornerRadius="3" 
                         Background="{TemplateBinding Background}">
@@ -27,6 +26,7 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="30"/>
         <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontFamily" Value="{StaticResource myFont2}"/>
     </Style>
     <Style x:Key="RectangleStyle" TargetType="Rectangle">
         <Setter Property="Width" Value="80"/>
@@ -75,5 +75,103 @@
                 <Setter Property="Width" Value="30"/>
             </Trigger>
         </Style.Triggers>
+    </Style>
+    <!--style của các nút bấm giao diện mới bắt đầu-->
+    <Style x:Key="btnGiaoDien" TargetType="Rectangle">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="300"/>
+        <Setter Property="Height" Value="70"/>
+        <Setter Property="Fill">
+            <Setter.Value>
+                <ImageBrush ImageSource="images/xaml/button.png"/>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Fill">
+                    <Setter.Value>
+                        <ImageBrush ImageSource="images/xaml/buttonHover.png"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <EventTrigger RoutedEvent="Rectangle.MouseLeftButtonDown">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Duration="0:0:0.2">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <ImageBrush ImageSource="images/xaml/buttonClick.png"/>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <ImageBrush ImageSource="images/xaml/button.png"/>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+            </EventTrigger>
+            <Trigger Property="Visibility" Value="Visible">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation To="0 0 0 0" Duration="0:0:1" From="0 0 1300 0" Storyboard.TargetProperty="Margin"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <!--style của chữ lúc bắt đầu game-->
+    <Style x:Key="textBlockGiaoDien" TargetType="TextBlock">
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Style.Triggers>
+            <Trigger Property="Visibility" Value="Visible">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation To="0 20 0 0" Duration="0:0:1" From="0 20 1300 0" Storyboard.TargetProperty="Margin"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <!--style nút tùy chọn-->
+    <Style x:Key="textBlockTuyChon" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource myFont}"/>
+        <Setter Property="FontSize" Value="25"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Purple"/>
+    </Style>
+    <Style x:Key="textBoxTuyChon" TargetType="TextBox">
+        <Setter Property="FontFamily" Value="{StaticResource myFont1}"/>
+        <Setter Property="FontSize" Value="25"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Width" Value="250"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <ImageBrush ImageSource="images/xaml/backGroundTextBox.png"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="MaxLength" Value="25"/>
+    </Style>
+    <Style x:Key="comboBoxTuyChon" TargetType="ComboBox">
+        <Setter Property="FontFamily" Value="{StaticResource myFont}"/>
+        <Setter Property="SelectedIndex" Value="0"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Margin" Value="20 0 0 0"/>
+        <Setter Property="Width" Value="150"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 </ResourceDictionary>

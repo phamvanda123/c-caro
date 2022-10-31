@@ -31,7 +31,7 @@ namespace game_cờ_caro
         public static Player player1;
         Player player2;
         Random rnd = new Random();
-        string namePlayer1 = "", namePlayer2 = "";
+        string namePlayer1 = "PLAYER", namePlayer2 = "PLAYER 1";
         int luotDanh = 0;
         //lượt đánh = 0 là của người chơi thứ nhất quân cờ o
         //mảng chồng mảng để duyệt các nút xử lý thắng thua
@@ -45,7 +45,6 @@ namespace game_cờ_caro
             InitializeComponent();
             veBanCo();
             xlOnline = new xuLyOnline();
-            Timer.Interval = TimeSpan.FromMilliseconds(Chess.setingGiay * 10);
             Timer.Tick += Timer_Tick;
             Setting.MouseLeftButtonDown += (o, e) =>
             {
@@ -55,11 +54,18 @@ namespace game_cờ_caro
             };
             Reset.MouseLeftButtonDown += (o, e) => resetBanCo();
             Undo.MouseLeftButtonDown += Undo_MouseLeftButtonDown;
-            myWindow.Loaded += MyWindow_Loaded;
+            backMenu.MouseLeftButtonDown += (o, e) =>
+            {
+                myGridBackground.Visibility = Visibility.Visible;
+                myGridButton.Visibility = Visibility.Visible;
+            };
+            //đổ dữ liệu vào các combobox
+            ChonQuanCo(MyComboBox);
+            ChonQuanCo(MyComboBox1);
+            ChonQuanCo(MyComboBox3);
         }
         void cheDo2NguoiChoi()
         {
-            cheDoChoi = 1;
             //khởi tạo giá trị ban đầu khi chạy
             Chess.IndexQuanCoO = (int)MyComboBox.SelectedIndex;
             Chess.IndexQuanCoX = (int)MyComboBox1.SelectedIndex;
@@ -71,7 +77,7 @@ namespace game_cờ_caro
             txtHienThiTenNguoiChoi.Text = player1.Name.ToString();
             ImageTenNguoiChoi.Fill = player1.Image;
             Chess.setingGiay = Convert.ToInt32(txtPlayerTime.Text);
-            Timer.Interval = TimeSpan.FromMilliseconds(Chess.setingGiay);
+            Timer.Interval = TimeSpan.FromMilliseconds(Chess.setingGiay*10);
             resetBanCo();
             myGrid.Visibility = Visibility.Hidden;
             myGrid1.Visibility = Visibility.Hidden;
@@ -99,29 +105,42 @@ namespace game_cờ_caro
             myGrid1.Visibility = Visibility.Hidden;
             Timer.Start();
         }
-        #region xử lý nút tùy chọn
-        private void MyWindow_Loaded(object sender, RoutedEventArgs e)
+        void setting()
         {
-            ChonQuanCo(MyComboBox);
-            ChonQuanCo(MyComboBox1);
-            ChonQuanCo(MyComboBox3);
+            Chess.IndexQuanCoO = (int)MyComboBox.SelectedIndex;
+            Chess.IndexQuanCoX = (int)MyComboBox1.SelectedIndex;
+            Chess.IndexBackGround = (int)MyComboBox3.SelectedIndex;
+            player1 = new Player(namePlayer1, Chess.quanCoO[Chess.IndexQuanCoO]);
+            namePlayer1 = txtPlayer1.Text;
+            namePlayer2 = txtPlayer2.Text;
+            player2 = new Player(namePlayer2, Chess.quanCoX[Chess.IndexQuanCoX]);
+            txtHienThiTenNguoiChoi.Text = player1.Name.ToString();
+            ImageTenNguoiChoi.Fill = player1.Image;
+            Chess.setingGiay = Convert.ToInt32(txtPlayerTime.Text);
+            Timer.Interval = TimeSpan.FromMilliseconds(Chess.setingGiay * 10);
+            resetBanCo();
+            myGrid.Visibility = Visibility.Hidden;
+            myGrid1.Visibility = Visibility.Hidden;
+            if (textBlockBtn2.Text == "setting")
+            {
+                myGridBackground.Visibility = Visibility.Visible;
+                myGridButton.Visibility = Visibility.Visible;
+                textBlockBtn2.Text = "SETTING";
+            }
+            Timer.Start();
         }
+        #region xử lý nút tùy chọn
         void ChonQuanCo(ComboBox a)
         {
             List<XuLyTuyChonQuanCo> temp = new List<XuLyTuyChonQuanCo>()
             {
-                new XuLyTuyChonQuanCo(){Name ="kiểu 1"},
-                new XuLyTuyChonQuanCo(){Name ="kiểu 2"},
-                new XuLyTuyChonQuanCo(){Name ="kiểu 3"},
-                new XuLyTuyChonQuanCo(){Name ="kiểu 4"}
+                new XuLyTuyChonQuanCo(){Name ="Style 1"},
+                new XuLyTuyChonQuanCo(){Name ="Style 2"},
+                new XuLyTuyChonQuanCo(){Name ="Style 3"},
+                new XuLyTuyChonQuanCo(){Name ="Style 4"}
             };
             a.ItemsSource = temp;
             a.DisplayMemberPath = "Name";
-        }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            cheDoChoi = 1;
-            cheDo2NguoiChoi();
         }
         #endregion
         #region xử lý xaml
@@ -141,25 +160,39 @@ namespace game_cờ_caro
         private void Undo_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (viTriUndo.Count <= 0) return;
-            viTri p = viTriUndo.Pop();
-            Button btn = maTran[p.y][p.x];
-            btn.Background = Chess.backgroudBanCo[Chess.IndexBackGround];
-            if (luotDanh == 0)
+            if (cheDoChoi == 0)
             {
-                luotDanh = 1;
-                txtHienThiTenNguoiChoi.Text = player2.Name.ToString();
-                ImageTenNguoiChoi.Fill = player2.Image;
-                txtHienThiTenNguoiChoi.Tag = "1";
-                Time.Value = 100;
+                if (viTriUndo.Count <= 1) return;
+                viTri p1 = viTriUndo.Pop();
+                Button btn1 = maTran[p1.x][p1.y];
+                viTri p = viTriUndo.Pop();
+                Button btn = maTran[p.y][p.x];
+                btn.Background = Chess.backgroudBanCo[Chess.IndexBackGround];
+                btn1.Background = Chess.backgroudBanCo[Chess.IndexBackGround];
             }
-            else if (luotDanh == 1)
+            else
             {
-                luotDanh = 0;
-                txtHienThiTenNguoiChoi.Text = player1.Name.ToString();
-                ImageTenNguoiChoi.Fill = player1.Image;
-                txtHienThiTenNguoiChoi.Tag = "2";
-                Time.Value = 100;
+                viTri p = viTriUndo.Pop();
+                Button btn = maTran[p.y][p.x];
+                btn.Background = Chess.backgroudBanCo[Chess.IndexBackGround];
+                if (luotDanh == 0)
+                {
+                    luotDanh = 1;
+                    txtHienThiTenNguoiChoi.Text = player2.Name.ToString();
+                    ImageTenNguoiChoi.Fill = player2.Image;
+                    txtHienThiTenNguoiChoi.Tag = "1";
+                    Time.Value = 100;
+                }
+                else if (luotDanh == 1)
+                {
+                    luotDanh = 0;
+                    txtHienThiTenNguoiChoi.Text = player1.Name.ToString();
+                    ImageTenNguoiChoi.Fill = player1.Image;
+                    txtHienThiTenNguoiChoi.Tag = "2";
+                    Time.Value = 100;
+                }
             }
+            
         }
         //xử lý nút thu nhỏ
         private void Image_PreviewMouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
@@ -214,38 +247,6 @@ namespace game_cờ_caro
                 danhNgauNhien();
             }
         }
-        //hàm đánh 1 con cờ ngẫu nhiên
-        void danhNgauNhien()
-        {
-            int i, j;
-            do
-            {
-                i = rnd.Next(0, Chess.chieuRongBanCo - 1);
-                j = rnd.Next(0, Chess.chieuRongBanCo - 1);
-            }
-            while (maTran[i][j].Background != Chess.backgroudBanCo[Chess.IndexBackGround]);
-            viTriUndo.Push(LayToaDoNut(maTran[i][j]));
-            if (luotDanh == 0)
-            {
-                maTran[i][j].Background = player1.Image;
-                txtHienThiTenNguoiChoi.Text = player2.Name.ToString();
-                ImageTenNguoiChoi.Fill = player2.Image;
-                txtHienThiTenNguoiChoi.Tag = "1";
-                luotDanh = 1;
-            }
-            else if (luotDanh == 1)
-            {
-                maTran[i][j].Background = player2.Image;
-                luotDanh = 0;
-                txtHienThiTenNguoiChoi.Text = player1.Name.ToString();
-                ImageTenNguoiChoi.Fill = player1.Image;
-                txtHienThiTenNguoiChoi.Tag = "2";
-            }
-            if (WinLose(maTran[i][j]))
-            {
-                End();
-            }
-        }
         //sự kiện click cho button
         private void Btn_Click(object sender, RoutedEventArgs e)
         {
@@ -262,16 +263,20 @@ namespace game_cờ_caro
                 if (WinLose(btn))
                 {
                     End();
+                    return;
                 }
                 viTri a = new viTri();
-                a = TimNuocDi();
+                a = TimNuocDi();//hàm tìm nước đi trả về tọa độ hàng ngang là x hàng dọc là y
                 maTran[a.x][a.y].Background = Chess.quanCoX[Chess.IndexQuanCoX];
+                viTriUndo.Push(LayToaDoNut(btn));
+                viTriUndo.Push(a);
                 if (WinLose(maTran[a.x][a.y]))
                 {
                     MessageBox.Show("tro choi ket thuc");
                     resetBanCo();
                     return;
                 }
+                
             }
             else
             {
@@ -303,27 +308,12 @@ namespace game_cờ_caro
 
         }
         //hàm kiểm tra thắng thua
+        #region kiểm tra thắng thua: ngang,dọc,chéo trên,chéo dưới
         private bool WinLose(Button btn)
         {
             return WinCheoTren(btn) || WinChieuNgang(btn) || WinChieuDoc(btn) || WinCheoDuoi(btn);
         }
         //hàm kết thúc game
-        private void End()
-        {
-            Timer.Stop();
-            MessageBox.Show("trò chơi kết thúc");
-            resetBanCo();
-            Timer.Start();
-        }
-        private viTri LayToaDoNut(Button btn)
-        {
-            //convert dùng để ép kiểu về kiểu dữ liệu int lấy ra vị trí hàng dọc của mảng
-            int hangNgang = Convert.ToInt32(btn.Tag);
-            //indexof ******
-            int hangDoc = maTran[hangNgang].IndexOf(btn);
-            viTri p = new viTri(hangDoc, hangNgang);
-            return p;
-        }
         private bool WinChieuNgang(Button btn)
         {
             int DemBenTrai = 0;
@@ -445,6 +435,8 @@ namespace game_cờ_caro
             }
             return DemBenTren + DemBenDuoi == 5;
         }
+        #endregion
+        #region tiện ít reset,end game,lấy tọa độ,đánh ngẫu nhiên
         void resetBanCo()
         {
             if (luotDanh == 0)
@@ -455,11 +447,65 @@ namespace game_cờ_caro
             myCanvas.Children.Clear();
             Time.Value = 100;
             veBanCo();
-            if (cheDoChoi == 0) maTran[10][10].Background = Chess.quanCoX[Chess.IndexQuanCoX];
+            if (cheDoChoi == 0)
+            {
+                maTran[10][10].Background = Chess.quanCoX[Chess.IndexQuanCoX];
+                viTriUndo.Push(new viTri(10,10));
+            }
 
         }
+        private void End()
+        {
+            Timer.Stop();
+            MessageBox.Show("trò chơi kết thúc");
+            resetBanCo();
+            Timer.Start();
+        }
+        private viTri LayToaDoNut(Button btn)
+        {
+            //convert dùng để ép kiểu về kiểu dữ liệu int lấy ra vị trí hàng dọc của mảng
+            int hangNgang = Convert.ToInt32(btn.Tag);
+            //indexof ******
+            int hangDoc = maTran[hangNgang].IndexOf(btn);
+            viTri p = new viTri(hangDoc, hangNgang);
+            return p;
+        }
+        //hàm đánh 1 con cờ ngẫu nhiên
+        void danhNgauNhien()
+        {
+            int i, j;
+            do
+            {
+                i = rnd.Next(0, Chess.chieuDaiBanCo - 1);
+                j = rnd.Next(0, Chess.chieuRongBanCo - 1);
+            }
+            while (maTran[i][j].Background != Chess.backgroudBanCo[Chess.IndexBackGround]);
+            viTriUndo.Push(LayToaDoNut(maTran[i][j]));
+            if (luotDanh == 0)
+            {
+                maTran[i][j].Background = player1.Image;
+                txtHienThiTenNguoiChoi.Text = player2.Name.ToString();
+                ImageTenNguoiChoi.Fill = player2.Image;
+                txtHienThiTenNguoiChoi.Tag = "1";
+                luotDanh = 1;
+            }
+            else if (luotDanh == 1)
+            {
+                maTran[i][j].Background = player2.Image;
+                luotDanh = 0;
+                txtHienThiTenNguoiChoi.Text = player1.Name.ToString();
+                ImageTenNguoiChoi.Fill = player1.Image;
+                txtHienThiTenNguoiChoi.Tag = "2";
+            }
+            if (WinLose(maTran[i][j]))
+            {
+                End();
+            }
+        }
         #endregion
-        // xử lý đánh với máy
+        #endregion
+
+        #region hàm xử lý đánh với máy
         public long[] tanCong = new long[7]
         {
             0,9,81,729,6561,59049,531441
@@ -468,9 +514,6 @@ namespace game_cờ_caro
         {
             0,4,32,256,2048,16384,131072
         };
-        //nước đánh đầu tiên
-        //hàm tìm nước đi
-        #region temp ai
         viTri TimNuocDi()
         {
             viTri p = new viTri();
@@ -898,10 +941,11 @@ namespace game_cờ_caro
         }
         #endregion
         #endregion
+        // các đối tượng sử dụng trong code
         public class viTri
         {
-            public int x;
-            public int y;
+            public int x;// x là vị trí hàng dọc
+            public int y;//y là vị trí hàng ngang
             public viTri(int x, int y)
             {
                 this.x = x;
@@ -926,11 +970,9 @@ namespace game_cờ_caro
             }
             public Player()
             {
-                Name = "nguoi choi";
-                Image = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/images/loading.gif")));
             }
         }
-
+        #region mở rộng chơi online   
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             xlOnline.IP =
@@ -976,11 +1018,64 @@ namespace game_cờ_caro
             MessageBox.Show(data +"pham van da");
             MessageBox.Show(data);
         }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        #endregion
+        #region thiết kế các nút của giao diện
+        private void Rectangle_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            cheDoChoi = 0;
-            cheDoDanhVoiMay();
+            if (textBlockBtn1.Text == "1 PLAYER") 
+            {
+                cheDoChoi = 0;
+                cheDoDanhVoiMay();
+                myGridBackground.Visibility = Visibility.Hidden;
+                myGridButton.Visibility = Visibility.Hidden;
+                textBlockBtn1.Text = "START";
+                textBlockBtn2.Text = "SETTING";
+                textBlockBtn3.Text = "QUIT";
+            }
+            else if (textBlockBtn1.Text == "START")
+            {
+                textBlockBtn1.Text = "1 PLAYER";
+                textBlockBtn2.Text = "2 PLAYER";
+                textBlockBtn3.Text = "BACK";
+            }
+           
+        }
+        #endregion
+        private void Rectangle_PreviewMouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
+        {
+            if (textBlockBtn2.Text == "2 PLAYER")
+            {
+                cheDoChoi = 1;
+                cheDo2NguoiChoi();
+                textBlockBtn1.Text = "START";
+                textBlockBtn2.Text = "SETTING";
+                textBlockBtn3.Text = "QUIT";
+            }
+            else
+            {
+                myGrid.Visibility = Visibility.Visible;
+                myGrid1.Visibility = Visibility.Visible;
+                textBlockBtn2.Text = "setting";
+            }
+            myGridBackground.Visibility = Visibility.Hidden;
+            myGridButton.Visibility = Visibility.Hidden;
+
+
+        }
+
+        private void Rectangle_PreviewMouseLeftButtonDown_2(object sender, MouseButtonEventArgs e)
+        {
+            setting();
+        }
+
+        private void Rectangle_PreviewMouseLeftButtonDown_3(object sender, MouseButtonEventArgs e)
+        {
+            if (textBlockBtn3.Text == "BACK")
+            {
+                textBlockBtn1.Text = "START";
+                textBlockBtn2.Text = "SETTING";
+                textBlockBtn3.Text = "QUIT";
+            }
         }
 
         public class XuLyTuyChonQuanCo

@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:game_cờ_caro"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <FontFamily x:Key="myFont" >/game cờ caro;component/font/Munstar-Regular.ttf#Munstar</FontFamily>
+        <FontFamily x:Key="myFont1" >/game cờ caro;component/font/Danger Night - Personal Use.ttf#Danger Night - Personal Use</FontFamily>
+        <FontFamily x:Key="myFont2" >/game cờ caro;component/font/VehicleBreaksDown-Regular.ttf#Vehicle Breaks Down</FontFamily>
     </Application.Resources>
 </Application>

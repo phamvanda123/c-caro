@@ -15,3 +15,21 @@ E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\obj\Debug\game cờ car
 E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\obj\Debug\game cờ caro.exe
 E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\obj\Debug\game cờ caro.pdb
 E:\bai wpf\lập trình c#\game cờ caro\game cờ caro\obj\Debug\myStyle.baml
+C:\Users\DELL\Documents\GitHub\c-caro\game cờ caro\game cờ caro\bin\Debug\game cờ caro.exe.config
+C:\Users\DELL\Documents\GitHub\c-caro\game cờ caro\game cờ caro\bin\Debug\game cờ caro.exe
+C:\Users\DELL\Documents\GitHub\c-caro\game cờ caro\game cờ caro\bin\Debug\game cờ caro.pdb
+C:\Users\DELL\Documents\GitHub\c-caro\game cờ caro\game cờ caro\obj\Debug\game cờ caro.csproj.AssemblyReference.cache
+C:\Users\DELL\Documents\GitHub\c-caro\game cờ caro\game cờ caro\obj\Debug\game cờ caro.csproj.SuggestedBindingRedirects.cache
+C:\Users\DELL\Documents\GitHub\c-caro\game cờ caro\game cờ caro\obj\Debug\myStyle.baml
+C:\Users\DELL\Documents\GitHub\c-caro\game cờ caro\game cờ caro\obj\Debug\MainWindow.g.cs
+C:\Users\DELL\Documents\GitHub\c-caro\game cờ caro\game cờ caro\obj\Debug\App.g.cs
+C:\Users\DELL\Documents\GitHub\c-caro\game cờ caro\game cờ caro\obj\Debug\game cờ caro_MarkupCompile.cache
+C:\Users\DELL\Documents\GitHub\c-caro\game cờ caro\game cờ caro\obj\Debug\game cờ caro_MarkupCompile.lref
+C:\Users\DELL\Documents\GitHub\c-caro\game cờ caro\game cờ caro\obj\Debug\MainWindow.baml
+C:\Users\DELL\Documents\GitHub\c-caro\game cờ caro\game cờ caro\obj\Debug\game cờ caro.g.resources
+C:\Users\DELL\Documents\GitHub\c-caro\game cờ caro\game cờ caro\obj\Debug\game_cờ_caro.Properties.Resources.resources
+C:\Users\DELL\Documents\GitHub\c-caro\game cờ caro\game cờ caro\obj\Debug\game cờ caro.csproj.GenerateResource.cache
+C:\Users\DELL\Documents\GitHub\c-caro\game cờ caro\game cờ caro\obj\Debug\game cờ caro.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Documents\GitHub\c-caro\game cờ caro\game cờ caro\obj\Debug\game cờ caro.exe
+C:\Users\DELL\Documents\GitHub\c-caro\game cờ caro\game cờ caro\obj\Debug\game cờ caro.pdb
+C:\Users\DELL\Documents\GitHub\c-caro\game cờ caro\game cờ caro\obj\Debug\App.baml
